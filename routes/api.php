@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CategoriesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,19 @@ Route::group(['middleware' => ['api' , 'checkPassword' , 'ChangeLanguage'] , 'na
     Route::post('get-main-categories' , 'CategoriesController@index');
     Route::post('get-category-byId' , 'CategoriesController@getCategoryById');
     Route::post('change-category-status' , 'CategoriesController@changeStatus');
+
+
+    Route::group(['prefix'=>'admin' , 'namespace'=> 'Admin'],function (){
+
+        Route::get('login' , 'AuthController@login');
+
+    });
+});
+
+
+
+Route::group(['middleware' => ['api' , 'checkPassword' , 'ChangeLanguage' , 'checkAdminToken:admin-api'] , 'namespace'=> 'Api'], function (){
+
+    Route::get('offers' , 'CategoriesController@index');
 
 });
