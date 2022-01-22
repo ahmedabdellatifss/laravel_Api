@@ -31,7 +31,7 @@ Route::group(['middleware' => ['api' , 'checkPassword' , 'ChangeLanguage'] , 'na
 
     Route::group(['prefix'=>'admin' , 'namespace'=> 'Admin'],function (){
 
-        Route::get('login' , 'AuthController@login');
+        Route::post('login' , 'AuthController@login');
 
     });
 });
