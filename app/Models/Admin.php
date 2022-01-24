@@ -12,7 +12,7 @@ class Admin extends Authenticatable implements JWTSubject
     protected $table = 'admins';
 
     protected $fillable = [
-        'name', 'email','created_at', 'updated_at'
+        'name','password' , 'email','created_at', 'updated_at'
     ];
 
 
