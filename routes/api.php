@@ -32,7 +32,7 @@ Route::group(['middleware' => ['api' , 'checkPassword' , 'ChangeLanguage'] , 'na
     Route::group(['prefix'=>'admin' , 'namespace'=> 'Admin'],function (){
 
         Route::post('login' , 'AuthController@login');
-        Route::post('logout' , 'AuthController@logout')->middelware('assignGuard:admin-api'); // #13
+        Route::post('logout' , 'AuthController@logout')->middleware(['assignGuard:admin-api']); // #13
 
     });
 });

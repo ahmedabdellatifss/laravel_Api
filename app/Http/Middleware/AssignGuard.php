@@ -13,8 +13,11 @@ class AssignGuard
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next , $guard = null)  // #13 laravel api proffesional code
     {
+        if($guard != null)
+            auth()->shouldUse($guard);
+
         return $next($request);
     }
 }

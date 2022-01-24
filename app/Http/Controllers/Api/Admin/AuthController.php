@@ -7,6 +7,7 @@ use App\Traits\GeneralTrait;
 //use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Auth;
 
 class AuthController extends Controller
@@ -46,6 +47,18 @@ class AuthController extends Controller
         //return
         }catch(\Exception $ex){
             return $this->returnError($ex->getCode() , $ex->getMessage());
+        }
+    }
+
+    // Logout
+    public function logout(Request $request)
+    {
+        $token = $request->header('auth-token');  #14
+        if($token){
+            JWTAuth::setToken($token)->invalidate(); // logout
+            return $this->returnSuccessMessage('logged out successfully');
+        }else{
+            $this->returnError('', 'Some thing went Wrong');
         }
     }
 }
