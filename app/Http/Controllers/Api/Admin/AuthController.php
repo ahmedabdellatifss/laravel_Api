@@ -55,7 +55,12 @@ class AuthController extends Controller
     {
         $token = $request->header('auth-token');  #14
         if($token){
-            JWTAuth::setToken($token)->invalidate(); // logout
+            try{
+                JWTAuth::setToken($token)->invalidate(); // logout
+            }catch(\Tymon\JWTAuth\Exceptions\TokenInvalidException $e){
+                return $this->returnError('', 'Some thing went Wrong');
+            }
+
             return $this->returnSuccessMessage('logged out successfully');
         }else{
             $this->returnError('', 'Some thing went Wrong');
