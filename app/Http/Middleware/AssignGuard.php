@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+
+use App\Traits\GeneralTrait;
 use Closure;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -10,6 +12,7 @@ use JWTAuth;
 
 class AssignGuard extends BaseMiddleware
 {
+    use GeneralTrait;
     /**
      * Handle an incoming request.
      *
