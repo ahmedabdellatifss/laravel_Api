@@ -35,6 +35,13 @@ Route::group(['middleware' => ['api' , 'checkPassword' , 'ChangeLanguage'] , 'na
         Route::post('logout' , 'AuthController@logout')->middleware(['assignGuard:admin-api']); // #13
 
     });
+
+    Route::group(['prefix'=>'user' ,  'middleware'=>'assignGuard:user-api'],function (){
+
+        Route::post('profile' , function (){
+            return 'Only authenticated user can reach me';
+        });
+    });
 });
 
 
