@@ -36,6 +36,15 @@ Route::group(['middleware' => ['api' , 'checkPassword' , 'ChangeLanguage'] , 'na
 
     });
 
+    //  User Login
+
+    Route::group(['prefix'=>'user' , 'namespace'=> 'User'],function (){
+
+        Route::post('login' , 'userAutController@login');
+
+    });
+
+
     Route::group(['prefix'=>'user' ,  'middleware'=>'assignGuard:user-api'],function (){
 
         Route::post('profile' , function (){
