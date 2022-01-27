@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // All Routes / Api here must be api authenticated
 
-Route::group(['middleware' => ['api' , 'checkPassword' , 'ChangeLanguage'] , 'namespace'=> 'Api'], function (){
+Route::group(['middleware' => ['api' ,/* 'checkPassword' , */'ChangeLanguage'] , 'namespace'=> 'Api'], function (){
 
     Route::post('get-main-categories' , 'CategoriesController@index');
     Route::post('get-category-byId' , 'CategoriesController@getCategoryById');
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['api' , 'checkPassword' , 'ChangeLanguage'] , 'na
     Route::group(['prefix'=>'user' ,  'middleware'=>'assignGuard:user-api'],function (){
 
         Route::post('profile' , function (){
-            return 'Only authenticated user can reach me';
+            return \Auth::user();  // Return Authenticated user data
         });
     });
 });
